@@ -4,12 +4,20 @@ Automated macOS-to-Linux file backup using `rsync` over SSH, with optional daily
 
 ## Requirements
 
-- macOS with `rsync` and `ssh-keygen` available (both ship with macOS)
+- macOS with `rsync`, `make`, and `ssh-keygen` available (both ship with macOS)
 - A Linux server accessible over SSH on your local network
 
 ## Setup
 
-**1. Install**
+**1. Clone the repository**
+
+```bash
+cd ~
+mkdir scripts
+git clone https://github.com/tomkat-cr/mac_backup.git
+```
+
+**2. Install**
 
 ```bash
 make install
@@ -17,7 +25,7 @@ make install
 
 This makes all scripts executable and copies `.env.example` to `scripts/.env`.
 
-**2. Configure**
+**3. Configure**
 
 Edit `scripts/.env` with your values:
 
@@ -30,7 +38,7 @@ LOG_FILE="/Users/yourname/logs/backup.log"
 SSH_KEY_FILE="id_ed25519"                # key filename (loaded from ~/.ssh/)
 ```
 
-**3. Generate and copy SSH key**
+**4. Generate and copy SSH key**
 
 ```bash
 make key-gen-and-transfer
@@ -38,7 +46,7 @@ make key-gen-and-transfer
 
 Generates an `ed25519` key pair at `~/.ssh/$SSH_KEY_FILE` and copies the public key to the remote host via `ssh-copy-id`. You will be prompted for your remote password once.
 
-**4. Run a manual backup**
+**5. Run a manual backup**
 
 ```bash
 make backup
