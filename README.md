@@ -13,7 +13,8 @@ Automated macOS-to-Linux file backup using `rsync` over SSH, with optional daily
 
 ```bash
 cd ~
-mkdir scripts
+mkdir -p scripts
+cd scripts
 git clone https://github.com/tomkat-cr/mac_backup.git
 ```
 
