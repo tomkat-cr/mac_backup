@@ -48,7 +48,11 @@ make key-gen-and-transfer
 
 Generates an `ed25519` key pair at `~/.ssh/$SSH_KEY_FILE` and copies the public key to the remote host via `ssh-copy-id`. You will be prompted for your remote password once.
 
-**5. Run a manual backup**
+**5. Allow backup to access the local files**
+
+Grant **Full Disk Access** to the specific backup script or to `/bin/bash` itself within **System Settings > Privacy & Security** if you see "Operation not permitted" errors in your logs.
+
+**6. Run a manual backup**
 
 ```bash
 make backup
