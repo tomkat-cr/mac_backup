@@ -23,9 +23,9 @@ Edit `scripts/.env` with your values:
 
 ```bash
 SOURCE_DIR="/Users/yourname/Documents/"   # local directory to back up
-REMOTE_USER="pi_user"                     # SSH user on the Linux server
+REMOTE_USER="linux_user"                     # SSH user on the Linux server
 REMOTE_HOST="192.168.1.100"              # IP or hostname of the Linux server
-TARGET_DIR="/home/pi_user/backups/mac/"  # destination path on the server
+TARGET_DIR="/home/linux_user/backups/mac/"  # destination path on the server
 LOG_FILE="/Users/yourname/logs/backup.log"
 SSH_KEY_FILE="id_ed25519"                # key filename (loaded from ~/.ssh/)
 ```

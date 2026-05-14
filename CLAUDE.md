@@ -39,7 +39,7 @@ All `make` targets that touch the remote host depend on `verify-envs` (and most 
 | `LOG_FILE` | Local path for the backup log |
 | `SSH_KEY_FILE` | Filename only (e.g. `id_ed25519`) — key loaded from `~/.ssh/` |
 
-`verify_envs.sh` rejects placeholder values (e.g. `pi_user`, `192.168.1.XX`) so the template values cannot slip through.
+`verify_envs.sh` rejects placeholder values (e.g. `linux_user`, `192.168.1.XX`) so the template values cannot slip through.
 
 ## Architecture
 

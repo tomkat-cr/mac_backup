@@ -28,7 +28,7 @@ if [ "$SOURCE_DIR" = "/Users/yourname/Documents/" ]; then
     exit 1
 fi
 
-if [ "$REMOTE_USER" = "pi_user" ]; then
+if [ "$REMOTE_USER" = "linux_user" ]; then
     echo "Error: Remote user is not set"
     exit 1
 fi
@@ -38,7 +38,7 @@ if [ "$REMOTE_HOST" = "192.168.1.XX" ]; then
     exit 1
 fi
 
-if [ "$TARGET_DIR" = "/home/pi_user/backups/macbook/" ]; then
+if [ "$TARGET_DIR" = "/home/linux_user/backups/macbook/" ]; then
     echo "Error: Target directory is not set"
     exit 1
 fi
