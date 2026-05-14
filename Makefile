@@ -1,4 +1,4 @@
-PHONY: help install
+# PHONY: help install
 
 help:
 	cat Makefile
