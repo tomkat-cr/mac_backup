@@ -2,11 +2,15 @@
 # scripts/setup_launchd.sh
 # 2026-05-14 | CR
  
+SCRIPT_DIR="$(dirname "$0")"
+cd "$SCRIPT_DIR"
+SCRIPT_DIR="$(pwd)"
+
 # --- CONFIGURATION ---
 # The unique label for your service
 LABEL="com.user.macbackup"
 # Path to your existing backup script
-SCRIPT_PATH="$HOME/scripts/mac_backup/scripts/backup.sh"
+SCRIPT_PATH="$SCRIPT_DIR/backup.sh"
 # Where you want the plist to live
 PLIST_PATH="$HOME/Library/LaunchAgents/$LABEL.plist"
 # Log paths

@@ -6,6 +6,7 @@ set -e
 
 SCRIPT_DIR="$(dirname "$0")"
 cd "$SCRIPT_DIR"
+SCRIPT_DIR="$(pwd)"
 
 set -o allexport; . .env ; set +o allexport ;
 
