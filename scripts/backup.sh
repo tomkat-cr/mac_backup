@@ -3,7 +3,11 @@
 # 2026-05-14 | CR
 
 set -e
-set -o allexport; . scripts/.env ; set +o allexport ;
+
+SCRIPT_DIR="$(dirname "$0")"
+cd "$SCRIPT_DIR"
+
+set -o allexport; . .env ; set +o allexport ;
 
 # ---------------------
 echo ""
@@ -13,8 +17,11 @@ echo "SOURCE_DIR=${SOURCE_DIR}"
 echo "REMOTE_USER=${REMOTE_USER}"
 echo "REMOTE_HOST=${REMOTE_HOST}"
 echo "TARGET_DIR=${TARGET_DIR}"
+echo "TARGET_DELETED_FILES_DIR=${TARGET_DELETED_FILES_DIR}"
 echo "LOG_FILE=${LOG_FILE}"
-echo "SSH_KEY_FILE=${SSH_KEY_FILE}"
+echo "SSH_KEY_FILE=${HOME}/.ssh/${SSH_KEY_FILE}"
+echo ""
+echo "SCRIPT_DIR=${SCRIPT_DIR}"
 echo ""
 # ---------------------
 
@@ -52,7 +59,7 @@ BACKUP_DATE=$(date "+%Y_%m_%d-%H_%M_%S")
 
 echo ""
 echo "Executing:"
-echo "rsync -avz --verbose --delete --exclude='.DS_Store' --exclude='.Trash' --exclude='$RECYCLE.BIN' -e ssh -i ~/.ssh/${SSH_KEY_FILE} --rsync-path=\"mkdir -p ${TARGET_DIR} && mkdir -p ${TARGET_DELETED_FILES_DIR} && rsync\" --delete --backup --backup-dir=\"${TARGET_DELETED_FILES_DIR}/${BACKUP_DATE}\" \"${SOURCE_DIR}\" \"${REMOTE_USER}@${REMOTE_HOST}:${TARGET_DIR}\""
+echo "rsync -avz --verbose --delete --exclude='.DS_Store' --exclude='.Trash' --exclude='$RECYCLE.BIN' -e ssh -i \"${HOME}/.ssh/${SSH_KEY_FILE}\" --rsync-path=\"mkdir -p ${TARGET_DIR} && mkdir -p ${TARGET_DELETED_FILES_DIR} && rsync\" --delete --backup --backup-dir=\"${TARGET_DELETED_FILES_DIR}/${BACKUP_DATE}\" \"${SOURCE_DIR}\" \"${REMOTE_USER}@${REMOTE_HOST}:${TARGET_DIR}\""
 echo ""
 
 rsync \
@@ -62,7 +69,7 @@ rsync \
     --exclude='.DS_Store' \
     --exclude='.Trash' \
     --exclude='$RECYCLE.BIN' \
-    -e ssh -i ~/.ssh/${SSH_KEY_FILE} \
+    -e ssh -i "${HOME}/.ssh/${SSH_KEY_FILE}" \
     --rsync-path="mkdir -p ${TARGET_DIR} && mkdir -p ${TARGET_DELETED_FILES_DIR} && rsync" \
     --backup --backup-dir="${TARGET_DELETED_FILES_DIR}/${BACKUP_DATE}" \
     "${SOURCE_DIR}" "${REMOTE_USER}@${REMOTE_HOST}:${TARGET_DIR}/" >> "$LOG_FILE" 2>&1
