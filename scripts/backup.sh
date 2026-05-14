@@ -64,7 +64,7 @@ rsync \
     --exclude='$RECYCLE.BIN' \
     -e ssh -i ~/.ssh/${SSH_KEY_FILE} \
     --rsync-path="mkdir -p ${TARGET_DIR} && mkdir -p ${TARGET_DELETED_FILES_DIR} && rsync" \
-    --delete --backup --backup-dir="${TARGET_DELETED_FILES_DIR}/${BACKUP_DATE}" \
+    --backup --backup-dir="${TARGET_DELETED_FILES_DIR}/${BACKUP_DATE}" \
     "${SOURCE_DIR}" "${REMOTE_USER}@${REMOTE_HOST}:${TARGET_DIR}/" >> "$LOG_FILE" 2>&1
 
 if [ $? -eq 0 ]; then
