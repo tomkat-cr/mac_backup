@@ -48,9 +48,11 @@ fi
 # --delete: Delete files on Pi that no longer exist on Mac (Mirroring)
 # --exclude: Skip hidden system files/caches
 
+BACKUP_DATE=$(date "+%Y_%m_%d-%H_%M_%S")
+
 echo ""
 echo "Executing:"
-echo "rsync -avz --verbose --delete --exclude='.DS_Store' --exclude='.Trash' -e ssh -i ~/.ssh/${SSH_KEY_FILE} --rsync-path=\"mkdir -p ${TARGET_DIR} && rsync\" \"${SOURCE_DIR}\" \"${REMOTE_USER}@${REMOTE_HOST}:${TARGET_DIR}\""
+echo "rsync -avz --verbose --delete --exclude='.DS_Store' --exclude='.Trash' --exclude='$RECYCLE.BIN' -e ssh -i ~/.ssh/${SSH_KEY_FILE} --rsync-path=\"mkdir -p ${TARGET_DIR} && mkdir -p ${TARGET_DELETED_FILES_DIR} && rsync\" --delete --backup --backup-dir=\"${TARGET_DELETED_FILES_DIR}/${BACKUP_DATE}\" \"${SOURCE_DIR}\" \"${REMOTE_USER}@${REMOTE_HOST}:${TARGET_DIR}\""
 echo ""
 
 rsync \
@@ -59,9 +61,11 @@ rsync \
     --delete \
     --exclude='.DS_Store' \
     --exclude='.Trash' \
+    --exclude='$RECYCLE.BIN' \
     -e ssh -i ~/.ssh/${SSH_KEY_FILE} \
-    --rsync-path="mkdir -p ${TARGET_DIR} && rsync" \
-    "${SOURCE_DIR}" "${REMOTE_USER}@${REMOTE_HOST}:${TARGET_DIR}" >> "$LOG_FILE" 2>&1
+    --rsync-path="mkdir -p ${TARGET_DIR} && mkdir -p ${TARGET_DELETED_FILES_DIR} && rsync" \
+    --delete --backup --backup-dir="${TARGET_DELETED_FILES_DIR}/${BACKUP_DATE}" \
+    "${SOURCE_DIR}" "${REMOTE_USER}@${REMOTE_HOST}:${TARGET_DIR}/" >> "$LOG_FILE" 2>&1
 
 if [ $? -eq 0 ]; then
     echo "Backup Successful: $(date)" >> "$LOG_FILE"

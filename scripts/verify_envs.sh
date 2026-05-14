@@ -13,7 +13,7 @@ fi
 
 set -o allexport; . scripts/.env ; set +o allexport ;
 
-if [ -z "$SOURCE_DIR" ] || [ -z "$REMOTE_USER" ] || [ -z "$REMOTE_HOST" ] || [ -z "$TARGET_DIR" ] || [ -z "$LOG_FILE" ] || [ -z "$SSH_KEY_FILE" ]; then
+if [ -z "$SOURCE_DIR" ] || [ -z "$REMOTE_USER" ] || [ -z "$REMOTE_HOST" ] || [ -z "$TARGET_DIR" ] || [ -z "$TARGET_DELETED_FILES_DIR" ] || [ -z "$LOG_FILE" ] || [ -z "$SSH_KEY_FILE" ]; then
     echo "Error: Missing environment variables"
     exit 1
 fi
@@ -38,8 +38,13 @@ if [ "$REMOTE_HOST" = "192.168.1.XX" ]; then
     exit 1
 fi
 
-if [ "$TARGET_DIR" = "/home/linux_user/backups/macbook/" ]; then
+if [ "$TARGET_DIR" = "/home/linux_user/backups/macbook" ]; then
     echo "Error: Target directory is not set"
+    exit 1
+fi
+
+if [ "$TARGET_DELETED_FILES_DIR" = "/home/linux_user/backups/macbook_deleted_files" ]; then
+    echo "Error: Target deleted files directory is not set"
     exit 1
 fi
 

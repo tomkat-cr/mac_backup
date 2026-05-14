@@ -1,6 +1,6 @@
 # mac_backup
 
-Automated macOS-to-Linux file backup using `rsync` over SSH, with optional daily scheduling via `launchd`.
+Automated macOS-to-Linux file backup using `rsync` over SSH, with optional daily scheduling via `launchd`. It handles backups with deletion tracking.
 
 ## Requirements
 
